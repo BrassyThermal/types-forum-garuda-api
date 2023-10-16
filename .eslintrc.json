@@ -1,0 +1,54 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.test.ts"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    },
+    {
+      "files": ["src/Domains/**/*.ts", "src/Applications/security/**/*.ts"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off"
+      }
+    },
+    {
+      "files": ["**/*.ts"],
+      "rules": {
+        "max-len": [
+          "error",
+          { "code": 100, "ignoreStrings": true, "ignoreTemplateLiterals": true }
+        ],
+        "eol-last": ["error", "always"],
+        "@typescript-eslint/quotes": ["error", "double"],
+        "@typescript-eslint/space-before-blocks": "error",
+        "@typescript-eslint/semi": "error",
+        "@typescript-eslint/consistent-type-definitions": "error",
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "variable",
+            "format": ["camelCase", "UPPER_CASE"],
+            "leadingUnderscore": "allow"
+          }
+        ],
+        "@typescript-eslint/type-annotation-spacing": [
+          "error",
+          {
+            "before": false,
+            "after": false,
+            "overrides": { "colon": { "before": true, "after": true } }
+          }
+        ]
+      }
+    }
+  ]
+}
