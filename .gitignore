@@ -3,3 +3,4 @@ coverage
 dist
 .env
 package-lock.json
+forum-garuda-api.pem
