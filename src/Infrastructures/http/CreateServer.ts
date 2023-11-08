@@ -73,14 +73,6 @@ export const CreateServer = async (
     },
   ]);
 
-  server.route({
-    method: "GET",
-    path: "/",
-    handler: () => ({
-      value: "Hello World!",
-    }),
-  });
-
   server.ext("onPreResponse", (request, h) => {
     // mendapatkan konteks response dari request
     const { response } = request;
@@ -101,12 +93,10 @@ export const CreateServer = async (
         return h.continue;
       }
 
-      return h
-        .response({
-          status: "error",
-          message: "terjadi kegagalan pada server kami",
-        })
-        .code(500);
+      return h.response({
+        status: "error",
+        message: "terjadi kegagalan pada server kami",
+      }).code(500);
     }
 
     return h.continue;
