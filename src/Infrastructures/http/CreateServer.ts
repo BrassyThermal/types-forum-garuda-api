@@ -73,6 +73,36 @@ export const CreateServer = async (
     },
   ]);
 
+  server.route({
+    method: "GET",
+    path: "/",
+    handler: (request, h) => {
+      const htmlResponse = `<html>
+          <head>
+            <title>Forum Garuda API</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          </head>
+          <body style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, blue, white);"
+          >
+            <h1 style="
+              font-family: sans-serif;
+              font-size: calc(8vw + 5px);
+              font-weight: 400;
+              color: #E91E63;"
+            >
+              Hello World!
+            </h1>
+          </body>
+        </html>`;
+      return h.response(htmlResponse).type("text/html").code(200);
+    },
+  });
+
   server.ext("onPreResponse", (request, h) => {
     // mendapatkan konteks response dari request
     const { response } = request;
@@ -93,10 +123,12 @@ export const CreateServer = async (
         return h.continue;
       }
 
-      return h.response({
-        status: "error",
-        message: "terjadi kegagalan pada server kami",
-      }).code(500);
+      return h
+        .response({
+          status: "error",
+          message: "terjadi kegagalan pada server kami",
+        })
+        .code(500);
     }
 
     return h.continue;
