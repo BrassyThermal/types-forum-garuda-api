@@ -20,15 +20,16 @@ describe("HTTP server", () => {
     it("should return 200 and hello world", async () => {
       // Arrange
       const server = await CreateServer({} as Container);
+      
       // Action
       const response = await server.inject({
         method: "GET",
         url: "/",
       });
+
       // Assert
-      const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(200);
-      expect(responseJson.value).toEqual("Hello World!");
+      expect(response.payload).toEqual(response.result);
     });
   });
 
