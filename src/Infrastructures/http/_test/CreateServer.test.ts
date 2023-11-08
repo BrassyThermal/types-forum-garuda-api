@@ -1,9 +1,10 @@
+import { Container } from "instances-container";
 import { CreateServer } from "../CreateServer";
 
 describe("HTTP server", () => {
   it("should response 404 when request unregistered route", async () => {
     // Arrange
-    const server = await CreateServer({} as any);
+    const server = await CreateServer({} as Container);
 
     // Action
     const response = await server.inject({
@@ -15,22 +16,22 @@ describe("HTTP server", () => {
     expect(response.statusCode).toEqual(404);
   });
 
-  it("should response 200 and Hello World!", async () => {
-    // Arrange
-    const server = await CreateServer({} as any);
-
-    // Action
-    const response = await server.inject({
-      method: "GET",
-      url: "/",
+  describe("when GET /", () => {
+    it("should return 200 and hello world", async () => {
+      // Arrange
+      const server = await CreateServer({} as Container);
+      // Action
+      const response = await server.inject({
+        method: "GET",
+        url: "/",
+      });
+      // Assert
+      const responseJson = JSON.parse(response.payload);
+      expect(response.statusCode).toEqual(200);
+      expect(responseJson.value).toEqual("Hello World!");
     });
-
-    // Assert
-    const responseJson = JSON.parse(response.payload);
-    expect(responseJson.statusCode).toEqual(200);
-    expect(responseJson.value).toEqual("Hello World!");
   });
-  
+
   it("should handle server error correctly", async () => {
     // Arrange
     const requestPayload = {
@@ -38,7 +39,7 @@ describe("HTTP server", () => {
       fullname: "Dicoding Indonesia",
       password: "super_secret",
     };
-    const server = await CreateServer({} as any); // fake injection
+    const server = await CreateServer({} as Container); // fake injection
 
     // Action
     const response = await server.inject({

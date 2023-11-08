@@ -73,6 +73,14 @@ export const CreateServer = async (
     },
   ]);
 
+  server.route({
+    method: "GET",
+    path: "/",
+    handler: () => ({
+      value: "Hello World!",
+    }),
+  });
+
   server.ext("onPreResponse", (request, h) => {
     // mendapatkan konteks response dari request
     const { response } = request;
@@ -81,20 +89,24 @@ export const CreateServer = async (
       const translatedError = DomainErrorTranslator.translate(response);
 
       if (translatedError instanceof ClientError) {
-        return h.response({
-          status: "fail",
-          message: translatedError.message,
-        }).code(translatedError.statusCode);
+        return h
+          .response({
+            status: "fail",
+            message: translatedError.message,
+          })
+          .code(translatedError.statusCode);
       }
 
       if (!(translatedError as { isServer : boolean }).isServer) {
         return h.continue;
       }
 
-      return h.response({
-        status: "error",
-        message: "terjadi kegagalan pada server kami",
-      }).code(500);
+      return h
+        .response({
+          status: "error",
+          message: "terjadi kegagalan pada server kami",
+        })
+        .code(500);
     }
 
     return h.continue;
