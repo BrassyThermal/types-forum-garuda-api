@@ -11,11 +11,9 @@ jobs:
 
     services:
       postgres:
-        image: postgres:latest
+        image: postgres
         env:
-          PGDATABASE: ${{ secrets.PGDATABASE_TEST }}
-          PGUSER: ${{ secrets.PGUSER_TEST }}
-          PGPASSWORD: ${{ secrets.PGPASSWORD_TEST }}
+          POSTGRES_PASSWORD: ${{ secrets.SUPERUSER_PASSWORD }}
         ports:
           - 5432:5432
         options: >-
@@ -42,8 +40,8 @@ jobs:
           CI: true
           PGHOST: ${{ secrets.PGHOST_TEST }}
           PGUSER: ${{ secrets.PGUSER_TEST }}
-          PGDATABASE: ${{ secrets.PGDATABASE_TEST }}
           PGPASSWORD: ${{ secrets.PGPASSWORD_TEST }}
+          PGDATABASE: ${{ secrets.PGDATABASE_TEST }}
           PGPORT: ${{ secrets.PGPORT_TEST }}
           ACCESS_TOKEN_KEY: ${{ secrets.ACCESS_TOKEN_KEY }}
           REFRESH_TOKEN_KEY: ${{ secrets.REFRESH_TOKEN_KEY }}
