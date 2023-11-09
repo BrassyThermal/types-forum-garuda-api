@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  test:
+  setup-and-test:
     runs-on: ubuntu-latest
 
     services:
@@ -21,6 +21,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
     strategy:
       matrix:
         node-version: [14.x]
@@ -31,6 +32,18 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Create User if Not Exists
+        run: |
+          psql -h localhost -U postgres -p 5432 -c 
+          "CREATE USER IF NOT EXISTS ${{ secrets.PGUSER_TEST }} 
+          WITH PASSWORD '${{ secrets.PGPASSWORD_TEST }}';"
+
+      - name: Create Database if Not Exists
+        run: |
+          psql -h localhost -U postgres -p 5432 -c 
+          "CREATE DATABASE IF NOT EXISTS ${{ secrets.PGDATABASE_TEST }};"
+
       - name: npm install, migrate and test
         run: |
           npm install
