@@ -77,7 +77,8 @@ export const CreateServer = async (
     method: "GET",
     path: "/",
     handler: (request, h) => {
-      const htmlResponse = `<html>
+      const htmlResponse = `
+        <html>
           <head>
             <title>Forum Garuda API</title>
             <meta charset="UTF-8">
@@ -87,19 +88,19 @@ export const CreateServer = async (
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(to bottom, blue, white);"
+            background: linear-gradient(to bottom, #007eff, white);"
           >
             <h1 style="
               font-family: sans-serif;
-              font-size: calc(8vw + 5px);
+              font-size: calc(8vw + 8px);
               font-weight: 400;
-              color: #E91E63;"
+              color: #161414;"
             >
               Hello World!
             </h1>
           </body>
         </html>`;
-      return h.response(htmlResponse).type("text/html").code(200);
+      return h.response(htmlResponse);
     },
   });
 
