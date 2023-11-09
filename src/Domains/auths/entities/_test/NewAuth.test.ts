@@ -1,6 +1,6 @@
 import NewAuth from "../NewAuth";
 
-describe("NewAuth entities", () => {
+describe("a NewAuth entities", () => {
   it("should throw error when payload not contain needed property", () => {
     // Arrange
     const payload = {

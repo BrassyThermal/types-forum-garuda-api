@@ -1,6 +1,6 @@
 import AddComment from "../AddComment";
 
-describe("a AddComment entities", () => {
+describe("an AddComment entities", () => {
   it("should throw error when payload did not contain needed property", () => {
     // Arrange
     const payload = {

@@ -9,10 +9,23 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          PGDATABASE: ${{ secrets.PGDATABASE_TEST }}
+          PGUSER: ${{ secrets.PGUSER_TEST }}
+          PGPASSWORD: ${{ secrets.PGPASSWORD_TEST }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     strategy:
       matrix:
         node-version: [14.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
       - uses: actions/checkout@v2
@@ -27,11 +40,6 @@ jobs:
           npm run test
         env:
           CI: true
-          PGHOST_TEST: ${{ secrets.PGHOST_TEST }}
-          PGUSER_TEST: ${{ secrets.PGUSER_TEST }}
-          PGDATABASE_TEST: ${{ secrets.PGDATABASE_TEST }}
-          PGPASSWORD_TEST: ${{ secrets.PGPASSWORD_TEST }}
-          PGPORT_TEST: ${{ secrets.PGPORT_TEST }}
           PGHOST: ${{ secrets.PGHOST_TEST }}
           PGUSER: ${{ secrets.PGUSER_TEST }}
           PGDATABASE: ${{ secrets.PGDATABASE_TEST }}
@@ -39,4 +47,3 @@ jobs:
           PGPORT: ${{ secrets.PGPORT_TEST }}
           ACCESS_TOKEN_KEY: ${{ secrets.ACCESS_TOKEN_KEY }}
           REFRESH_TOKEN_KEY: ${{ secrets.REFRESH_TOKEN_KEY }}
-          
