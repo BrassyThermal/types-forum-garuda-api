@@ -6,14 +6,19 @@ on:
       - master
 
 jobs:
-  setup-and-test:
+  test:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
 
     services:
       postgres:
         image: postgres
         env:
           POSTGRES_PASSWORD: ${{ secrets.SUPERUSER_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.PGDATABASE_TEST }}
         ports:
           - 5432:5432
         options: >-
@@ -22,27 +27,13 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
-    strategy:
-      matrix:
-        node-version: [14.x]
-
     steps:
       - uses: actions/checkout@v2
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: Create User if Not Exists
-        run: |
-          psql -h localhost -U postgres -p 5432 -c 
-          "CREATE USER IF NOT EXISTS ${{ secrets.PGUSER_TEST }} 
-          WITH PASSWORD '${{ secrets.PGPASSWORD_TEST }}';"
-
-      - name: Create Database if Not Exists
-        run: |
-          psql -h localhost -U postgres -p 5432 -c 
-          "CREATE DATABASE IF NOT EXISTS ${{ secrets.PGDATABASE_TEST }};"
 
       - name: npm install, migrate and test
         run: |
@@ -56,5 +47,10 @@ jobs:
           PGPASSWORD: ${{ secrets.PGPASSWORD_TEST }}
           PGDATABASE: ${{ secrets.PGDATABASE_TEST }}
           PGPORT: ${{ secrets.PGPORT_TEST }}
+          PGHOST_TEST: ${{ secrets.PGHOST_TEST }}
+          PGUSER_TEST: ${{ secrets.PGUSER_TEST }}
+          PGDATABASE_TEST: ${{ secrets.PGDATABASE_TEST }}
+          PGPASSWORD_TEST: ${{ secrets.PGPASSWORD_TEST }}
+          PGPORT_TEST: ${{ secrets.PGPORT_TEST }}
           ACCESS_TOKEN_KEY: ${{ secrets.ACCESS_TOKEN_KEY }}
           REFRESH_TOKEN_KEY: ${{ secrets.REFRESH_TOKEN_KEY }}

@@ -1,4 +1,4 @@
-export default class CheckLike {
+export default class AddLike {
   constructor(payload : object) {
     this._verifyPayload(payload);
   }

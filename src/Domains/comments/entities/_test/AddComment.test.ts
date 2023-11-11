@@ -9,7 +9,9 @@ describe("an AddComment entities", () => {
     };
 
     // Action and Assert
-    expect(() => new AddComment(payload as any)).toThrowError("ADD_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY");
+    expect(() => new AddComment(payload as any)).toThrowError(
+      "ADD_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY"
+    );
   });
 
   it("should throw error when payload did not meet data type specification", () => {
