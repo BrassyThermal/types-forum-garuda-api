@@ -1,6 +1,6 @@
 import AddedThread from "../AddedThread";
 
-describe("a AddedThread entities", () => {
+describe("an AddedThread entities", () => {
   it("should throw error when payload did not contain needed property", () => {
     // Arrange
     const payload = {

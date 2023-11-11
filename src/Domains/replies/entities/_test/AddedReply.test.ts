@@ -1,6 +1,6 @@
 import AddedReply from "../AddedReply";
 
-describe("a AddedReply entities", () => {
+describe("an AddedReply entities", () => {
   it("should throw error when payload did not contain needed property", () => {
     // Arrange
     const payload = {

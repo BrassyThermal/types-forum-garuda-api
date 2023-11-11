@@ -1,6 +1,6 @@
 import UserRegister from "../UserRegister";
 
-describe("a UserRegister entities", () => {
+describe("an UserRegister entities", () => {
   it("should throw error when payload did not contain needed property", () => {
     // Arrange
     const payload = {
