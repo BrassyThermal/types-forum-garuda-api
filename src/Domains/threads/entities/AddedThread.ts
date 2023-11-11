@@ -19,6 +19,7 @@ export default class AddedThread {
 
   _verifyPayload(payload : AddedThreadPayload) {
     const { id, title, owner } = payload;
+
     if (!id || !title || !owner) {
       throw new Error("ADDED_THREAD.NOT_CONTAIN_NEEDED_PROPERTY");
     }

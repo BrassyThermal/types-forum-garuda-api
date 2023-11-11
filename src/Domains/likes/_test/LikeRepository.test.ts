@@ -14,7 +14,7 @@ describe("LikeRepository", () => {
       "LIKE_REPOSITORY.METHOD_NOT_IMPLEMENTED"
     );
 
-    await expect(likeRepository.uncheckLike({})).rejects.toThrowError(
+    await expect(likeRepository.checkStatus({})).rejects.toThrowError(
       "LIKE_REPOSITORY.METHOD_NOT_IMPLEMENTED"
     );
 
