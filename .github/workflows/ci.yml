@@ -18,6 +18,7 @@ jobs:
         image: postgres
         env:
           POSTGRES_PASSWORD: ${{ secrets.PGPASSWORD_TEST }}
+          POSTGRES_USER: ${{ secrets.PGUSER_TEST }}
           POSTGRES_DB: ${{ secrets.PGDATABASE_TEST }}
         ports:
           - 5432:5432
