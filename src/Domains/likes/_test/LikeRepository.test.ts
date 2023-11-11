@@ -18,7 +18,7 @@ describe("LikeRepository", () => {
       "LIKE_REPOSITORY.METHOD_NOT_IMPLEMENTED"
     );
 
-    await expect(likeRepository.getLikeByThreadId({})).rejects.toThrowError(
+    await expect(likeRepository.getLikeByThreadId("")).rejects.toThrowError(
       "LIKE_REPOSITORY.METHOD_NOT_IMPLEMENTED"
     );
   });

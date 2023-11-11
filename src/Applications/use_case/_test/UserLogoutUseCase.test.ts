@@ -8,9 +8,9 @@ describe("UserLogoutUseCase", () => {
     const userLogoutUseCase = new UserLogoutUseCase({} as any);
 
     // Action & Assert
-    await expect(userLogoutUseCase.execute(useCasePayload as any))
-      .rejects
-      .toThrowError("DELETE_AUTHENTICATION_USE_CASE.NOT_CONTAIN_REFRESH_TOKEN");
+    await expect(userLogoutUseCase.execute(useCasePayload as any)).rejects.toThrowError(
+      "DELETE_AUTHENTICATION_USE_CASE.NOT_CONTAIN_REFRESH_TOKEN"
+    );
   });
 
   it("should throw error if refresh token not string", async () => {
@@ -21,9 +21,9 @@ describe("UserLogoutUseCase", () => {
     const userLogoutUseCase = new UserLogoutUseCase({} as any);
 
     // Action & Assert
-    await expect(userLogoutUseCase.execute(useCasePayload as any))
-      .rejects
-      .toThrowError("DELETE_AUTHENTICATION_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATION");
+    await expect(userLogoutUseCase.execute(useCasePayload as any)).rejects.toThrowError(
+      "DELETE_AUTHENTICATION_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATION"
+    );
   });
 
   it("should orchestrating the delete authentication action correctly", async () => {
@@ -31,23 +31,28 @@ describe("UserLogoutUseCase", () => {
     const useCasePayload = {
       refreshToken: "refreshToken",
     };
-    const mockAuthRepository = new AuthRepository();
-    mockAuthRepository.checkAvailabilityToken = jest.fn()
-      .mockImplementation(() => Promise.resolve());
-    mockAuthRepository.deleteToken = jest.fn()
-      .mockImplementation(() => Promise.resolve());
 
+    /** creating dependency of use case */
+    const mockAuthRepository = new AuthRepository();
+
+    /** mocking needed function */
+    mockAuthRepository.checkAvailabilityToken = jest.fn(() => Promise.resolve());
+    mockAuthRepository.deleteToken = jest.fn(() => Promise.resolve());
+
+    /** creating use case instance */
     const userLogoutUseCase = new UserLogoutUseCase({
       authRepository: mockAuthRepository,
     });
 
-    // Act
+    // Action
     await userLogoutUseCase.execute(useCasePayload);
 
     // Assert
-    expect(mockAuthRepository.checkAvailabilityToken)
-      .toHaveBeenCalledWith(useCasePayload.refreshToken);
-    expect(mockAuthRepository.deleteToken)
-      .toHaveBeenCalledWith(useCasePayload.refreshToken);
+    expect(mockAuthRepository.checkAvailabilityToken).toHaveBeenCalledWith(
+      useCasePayload.refreshToken
+    );
+    expect(mockAuthRepository.deleteToken).toHaveBeenCalledWith(
+      useCasePayload.refreshToken
+    );
   });
 });

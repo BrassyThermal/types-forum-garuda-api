@@ -12,7 +12,6 @@ describe("AddCommentUseCase", () => {
       content: "sebuah comment",
       owner: "user-123",
     };
-
     const expectedAddedComment = new AddedComment({
       id: "comment-123",
       content: useCasePayload.content,

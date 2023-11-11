@@ -1,6 +1,7 @@
 import ThreadRepository from "../../Domains/threads/ThreadRepository";
 import CommentRepository from "../../Domains/comments/CommentRepository";
 import ReplyRepository from "../../Domains/replies/ReplyRepository";
+import LikeRepository from "../../Domains/likes/LikeRepository";
 import CheckThread from "../../Domains/threads/entities/CheckThread";
 import CheckComment, { type InterfaceComment } from "../../Domains/comments/entities/CheckComment";
 import CheckReply, { type InterfaceReply } from "../../Domains/replies/entities/CheckReply";
@@ -9,6 +10,7 @@ interface CheckThreadDetailRepository {
   threadRepository : ThreadRepository;
   commentRepository : CommentRepository;
   replyRepository : ReplyRepository;
+  likeRepository : LikeRepository;
 }
 
 export default class CheckThreadDetailUseCase {

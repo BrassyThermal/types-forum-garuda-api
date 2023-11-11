@@ -36,13 +36,6 @@ describe("DeleteReplyUseCase", () => {
     await deleteReplyUseCase.execute(useCasePayload);
 
     // Assert
-    expect(mockThreadRepository.checkThread).toBeCalledWith(
-      useCasePayload.threadId
-    );
-    expect(mockCommentRepository.checkComment).toBeCalledWith(
-      useCasePayload.commentId,
-      useCasePayload.threadId
-    );
     expect(mockReplyRepository.checkReply).toBeCalledWith(
       useCasePayload.replyId,
       useCasePayload.commentId
@@ -53,6 +46,13 @@ describe("DeleteReplyUseCase", () => {
     );
     expect(mockReplyRepository.deleteReplyById).toBeCalledWith(
       useCasePayload.replyId
+    );
+    expect(mockThreadRepository.checkThread).toBeCalledWith(
+      useCasePayload.threadId
+    );
+    expect(mockCommentRepository.checkComment).toBeCalledWith(
+      useCasePayload.commentId,
+      useCasePayload.threadId
     );
   });
 });

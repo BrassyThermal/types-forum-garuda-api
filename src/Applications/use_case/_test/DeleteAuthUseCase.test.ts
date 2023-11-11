@@ -8,9 +8,9 @@ describe("DeleteAuthUseCase", () => {
     const deleteAuthUseCase = new DeleteAuthUseCase({} as any);
 
     // Action & Assert
-    await expect(deleteAuthUseCase.execute(useCasePayload as any))
-      .rejects
-      .toThrowError("DELETE_AUTHENTICATION_USE_CASE.NOT_CONTAIN_REFRESH_TOKEN");
+    await expect(deleteAuthUseCase.execute(useCasePayload as any)).rejects.toThrowError(
+      "DELETE_AUTHENTICATION_USE_CASE.NOT_CONTAIN_REFRESH_TOKEN"
+    );
   });
 
   it("should throw error if refresh token not string", async () => {
@@ -21,9 +21,9 @@ describe("DeleteAuthUseCase", () => {
     const deleteAuthUseCase = new DeleteAuthUseCase({} as any);
 
     // Action & Assert
-    await expect(deleteAuthUseCase.execute(useCasePayload as any))
-      .rejects
-      .toThrowError("DELETE_AUTHENTICATION_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATION");
+    await expect(deleteAuthUseCase.execute(useCasePayload as any)).rejects.toThrowError(
+      "DELETE_AUTHENTICATION_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATION"
+    );
   });
 
   it("should orchestrating the delete authentication action correctly", async () => {
@@ -31,23 +31,30 @@ describe("DeleteAuthUseCase", () => {
     const useCasePayload = {
       refreshToken: "refreshToken",
     };
+
+     /** creating dependency of use case */
     const mockAuthRepository = new AuthRepository();
+
+    /** mocking needed function */
     mockAuthRepository.checkAvailabilityToken = jest.fn()
       .mockImplementation(() => Promise.resolve());
     mockAuthRepository.deleteToken = jest.fn()
       .mockImplementation(() => Promise.resolve());
 
+    /** creating use case instance */
     const deleteAuthUseCase = new DeleteAuthUseCase({
       authRepository: mockAuthRepository,
     });
 
-    // Act
+    // Action
     await deleteAuthUseCase.execute(useCasePayload);
 
     // Assert
-    expect(mockAuthRepository.checkAvailabilityToken)
-      .toHaveBeenCalledWith(useCasePayload.refreshToken);
-    expect(mockAuthRepository.deleteToken)
-      .toHaveBeenCalledWith(useCasePayload.refreshToken);
+    expect(mockAuthRepository.checkAvailabilityToken).toHaveBeenCalledWith(
+      useCasePayload.refreshToken
+    );
+    expect(mockAuthRepository.deleteToken).toHaveBeenCalledWith(
+      useCasePayload.refreshToken
+    );
   });
 });

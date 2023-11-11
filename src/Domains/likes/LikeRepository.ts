@@ -3,7 +3,7 @@ export default class LikeRepository {
     throw new Error("LIKE_REPOSITORY.METHOD_NOT_IMPLEMENTED");
   }
 
-  async checkLike(commentId : string, owner : string) {
+  async checkLike(commentId : string, owner : string) : Promise<void | object> {
     throw new Error("LIKE_REPOSITORY.METHOD_NOT_IMPLEMENTED");
   }
 
@@ -11,7 +11,7 @@ export default class LikeRepository {
     throw new Error("LIKE_REPOSITORY.METHOD_NOT_IMPLEMENTED");
   }
 
-  async getLikeByThreadId(threadId : object) {
+  async getLikeByThreadId(threadId : string) : Promise<object> {
     throw new Error("LIKE_REPOSITORY.METHOD_NOT_IMPLEMENTED");
   }
 }

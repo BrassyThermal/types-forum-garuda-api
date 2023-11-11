@@ -16,36 +16,31 @@ describe("GetAuthenticationUseCase", () => {
       accessToken: "access_token",
       refreshToken: "refresh_token",
     });
+
+    /** creating dependency of use case */
     const mockUserRepository = new UserRepository();
     const mockAuthRepository = new AuthRepository();
     const mockAuthTokenManager = new AuthTokenManager();
     const mockPasswordHash = new PasswordHash();
 
-    // Mocking
-    mockUserRepository.getPasswordByUsername = jest
-      .fn()
+    /** mocking needed function */
+    mockUserRepository.getPasswordByUsername = jest.fn()
       .mockImplementation(() => Promise.resolve("encrypted_password"));
-    mockPasswordHash.comparePassword = jest
-      .fn()
+    mockPasswordHash.comparePassword = jest.fn()
       .mockImplementation(() => Promise.resolve());
-    mockAuthTokenManager.createAccessToken = jest
-      .fn()
+    mockAuthTokenManager.createAccessToken = jest.fn()
       .mockImplementation(() =>
         Promise.resolve(mockedAuthentication.accessToken)
       );
-    mockAuthTokenManager.createRefreshToken = jest
-      .fn()
+    mockAuthTokenManager.createRefreshToken = jest.fn()
       .mockImplementation(() =>
         Promise.resolve(mockedAuthentication.refreshToken)
       );
-    mockUserRepository.getIdByUsername = jest
-      .fn()
+    mockUserRepository.getIdByUsername = jest.fn()
       .mockImplementation(() => Promise.resolve("user-123"));
-    mockAuthRepository.addToken = jest
-      .fn()
-      .mockImplementation(() => Promise.resolve());
-
-    // create use case instance
+    mockAuthRepository.addToken = jest.fn(() => Promise.resolve());
+    
+    /** creating use case instance */
     const userLoginUseCase = new UserLoginUseCase({
       userRepository: mockUserRepository,
       authRepository: mockAuthRepository,

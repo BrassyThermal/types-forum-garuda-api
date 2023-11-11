@@ -58,11 +58,11 @@ describe("AddReplyUseCase", () => {
         owner: useCasePayload.owner,
       })
     );
-    expect(mockThreadRepository.checkThread).toBeCalledWith(
-      useCasePayload.threadId
-    );
     expect(mockCommentRepository.checkComment).toBeCalledWith(
       useCasePayload.commentId,
+      useCasePayload.threadId
+    );
+    expect(mockThreadRepository.checkThread).toBeCalledWith(
       useCasePayload.threadId
     );
   });
