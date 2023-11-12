@@ -19,7 +19,7 @@ const config : Record<string, Knex.Config> = {
 		},
 	},
 
-	development: {
+	production: {
 		client: "pg",
 		connection: {
 			host: process.env.PGHOST,

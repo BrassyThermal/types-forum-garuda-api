@@ -1,7 +1,7 @@
 import ThreadRepository from "../../Domains/threads/ThreadRepository";
 import CommentRepository from "../../Domains/comments/CommentRepository";
 import ReplyRepository from "../../Domains/replies/ReplyRepository";
-import LikeRepository from "../../Domains/likes/LikeRepository";
+import LikeRepository, { like_count } from "../../Domains/likes/LikeRepository";
 import CheckThread from "../../Domains/threads/entities/CheckThread";
 import CheckComment, { type InterfaceComment } from "../../Domains/comments/entities/CheckComment";
 import CheckReply, { type InterfaceReply } from "../../Domains/replies/entities/CheckReply";
@@ -17,15 +17,18 @@ export default class CheckThreadDetailUseCase {
   _threadRepository : ThreadRepository;
   _commentRepository : CommentRepository;
   _replyRepository : ReplyRepository;
+  _likeRepository : LikeRepository;
 
   constructor({
     threadRepository,
     commentRepository,
     replyRepository,
+    likeRepository
   } : CheckThreadDetailRepository) {
     this._threadRepository = threadRepository;
     this._commentRepository = commentRepository;
     this._replyRepository = replyRepository;
+    this._likeRepository = likeRepository;
   }
 
   async execute(useCasePayload : { threadId : string }) {
@@ -41,10 +44,13 @@ export default class CheckThreadDetailUseCase {
       threadDetail.threadId,
       true
     );
-
+    const likes = await this._likeRepository.getLikeByThreadId(
+      threadDetail.threadId,
+    );
     const checkedComment = this._checkComment(
       new CheckComment(comments).returnAction(),
-      replies
+      replies,
+      likes
     );
 
     return {
@@ -53,12 +59,19 @@ export default class CheckThreadDetailUseCase {
     };
   }
 
-  private _checkComment(comments : InterfaceComment[], replies : InterfaceReply[]) {
-    let i = 0;
+  private _checkComment(
+    comments : InterfaceComment[], 
+    replies : InterfaceReply[], 
+    likes : like_count[]
+  ) {
+    let a = 0;
+    let b = 0;
+
     for (const comment of comments) {
       comment.replies = [];
-      while (i < replies.length && replies[i].comment_id === comment.id) {
-        comment.replies.push(new CheckReply(replies[i++]).returnAction());
+      comment.likeCount = Number(likes[b++].like_count);
+      while (a < replies.length && replies[a].comment_id === comment.id) {
+        comment.replies.push(new CheckReply(replies[a++]).returnAction());
       }
     }
     return comments;

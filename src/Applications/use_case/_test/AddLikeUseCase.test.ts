@@ -2,6 +2,7 @@ import ThreadRepository from "../../../Domains/threads/ThreadRepository";
 import CommentRepository from "../../../Domains/comments/CommentRepository";
 import LikeRepository from "../../../Domains/likes/LikeRepository";
 import AddLikeUseCase from "../AddLikeUseCase";
+
 describe("AddLikeUseCase", () => {
   it("should orchestrate the post like action correctly when like does not exist", async () => {
     //Arrange
@@ -50,7 +51,7 @@ describe("AddLikeUseCase", () => {
       );
   });
 
-  it("", async () => {
+  it("should orchestrate the post like action correctly when like exists", async () => {
     //Arrange
     const useCasePayload = {
       threadId: "thread-123",
