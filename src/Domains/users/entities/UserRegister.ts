@@ -24,11 +24,7 @@ export default class UserRegister {
       throw new Error("USER_REGISTER.NOT_CONTAIN_NEEDED_PROPERTY");
     }
 
-    if (
-      typeof username !== "string" ||
-      typeof password !== "string" ||
-      typeof fullname !== "string"
-    ) {
+    if (typeof username !== "string" || typeof password !== "string" || typeof fullname !== "string") {
       throw new Error("USER_REGISTER.NOT_MEET_DATA_TYPE_SPECIFICATION");
     }
 

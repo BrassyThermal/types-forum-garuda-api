@@ -29,7 +29,7 @@ describe("HTTP server", () => {
 
       // Assert
       expect(response.statusCode).toEqual(200);
-      expect(response.payload).toEqual(response.result);
+      expect(response.headers["content-type"]).toEqual("text/html; charset=utf-8");
     });
   });
 

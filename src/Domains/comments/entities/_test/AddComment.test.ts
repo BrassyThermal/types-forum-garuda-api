@@ -1,6 +1,6 @@
 import AddComment from "../AddComment";
 
-describe("a AddComment entities", () => {
+describe("an AddComment entities", () => {
   it("should throw error when payload did not contain needed property", () => {
     // Arrange
     const payload = {
@@ -9,7 +9,9 @@ describe("a AddComment entities", () => {
     };
 
     // Action and Assert
-    expect(() => new AddComment(payload as any)).toThrowError("ADD_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY");
+    expect(() => new AddComment(payload as any)).toThrowError(
+      "ADD_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY"
+    );
   });
 
   it("should throw error when payload did not meet data type specification", () => {
