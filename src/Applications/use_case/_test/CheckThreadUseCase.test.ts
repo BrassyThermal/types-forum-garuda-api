@@ -134,18 +134,18 @@ describe("CheckThreadDetailUseCase", () => {
 
     // Assert
     expect(result).toStrictEqual(expectedResult);
-    expect(mockThreadRepository.getThreadById).toBeCalledWith(
+    expect(mockThreadRepository.getThreadById).toHaveBeenCalledWith(
       useCasePayload.threadId
     );
-    expect(mockCommentRepository.getCommentByThreadId).toBeCalledWith(
+    expect(mockCommentRepository.getCommentByThreadId).toHaveBeenCalledWith(
       useCasePayload.threadId,
       true
     );
-    expect(mockReplyRepository.getReplyByThreadId).toBeCalledWith(
+    expect(mockReplyRepository.getReplyByThreadId).toHaveBeenCalledWith(
       useCasePayload.threadId,
       true
     );
-    expect(mockLikeRepository.getLikeByThreadId).toBeCalledWith(
+    expect(mockLikeRepository.getLikeByThreadId).toHaveBeenCalledWith(
       useCasePayload.threadId
     );
   });

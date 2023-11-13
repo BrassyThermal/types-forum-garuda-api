@@ -41,7 +41,7 @@ describe("AddThreadUseCase", () => {
 
     // Assert
     expect(addedThread).toStrictEqual(expectedAddedThread);
-    expect(mockThreadRepository.addThread).toBeCalledWith(
+    expect(mockThreadRepository.addThread).toHaveBeenCalledWith(
       new AddThread({
         title: useCasePayload.title,
         body: useCasePayload.body,

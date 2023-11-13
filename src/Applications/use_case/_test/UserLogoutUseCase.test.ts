@@ -8,7 +8,7 @@ describe("UserLogoutUseCase", () => {
     const userLogoutUseCase = new UserLogoutUseCase({} as any);
 
     // Action & Assert
-    await expect(userLogoutUseCase.execute(useCasePayload as any)).rejects.toThrowError(
+    await expect(userLogoutUseCase.execute(useCasePayload as any)).rejects.toThrow(
       "DELETE_AUTHENTICATION_USE_CASE.NOT_CONTAIN_REFRESH_TOKEN"
     );
   });
@@ -21,7 +21,7 @@ describe("UserLogoutUseCase", () => {
     const userLogoutUseCase = new UserLogoutUseCase({} as any);
 
     // Action & Assert
-    await expect(userLogoutUseCase.execute(useCasePayload as any)).rejects.toThrowError(
+    await expect(userLogoutUseCase.execute(useCasePayload as any)).rejects.toThrow(
       "DELETE_AUTHENTICATION_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATION"
     );
   });

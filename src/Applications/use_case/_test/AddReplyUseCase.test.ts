@@ -50,7 +50,7 @@ describe("AddReplyUseCase", () => {
 
     // Assert
     expect(addedReply).toStrictEqual(expectedAddedReply);
-    expect(mockReplyRepository.addReply).toBeCalledWith(
+    expect(mockReplyRepository.addReply).toHaveBeenCalledWith(
       new AddReply({
         commentId: useCasePayload.commentId,
         threadId: useCasePayload.threadId,
@@ -58,11 +58,11 @@ describe("AddReplyUseCase", () => {
         owner: useCasePayload.owner,
       })
     );
-    expect(mockCommentRepository.checkComment).toBeCalledWith(
+    expect(mockCommentRepository.checkComment).toHaveBeenCalledWith(
       useCasePayload.commentId,
       useCasePayload.threadId
     );
-    expect(mockThreadRepository.checkThread).toBeCalledWith(
+    expect(mockThreadRepository.checkThread).toHaveBeenCalledWith(
       useCasePayload.threadId
     );
   });

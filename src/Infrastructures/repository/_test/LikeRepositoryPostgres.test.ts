@@ -88,9 +88,8 @@ describe("LikeRepositoryPostgres", () => {
       const likeRepositoryPostgres = new LikeRepositoryPostgres(pool, {} as any);
 
       // Action & Assert
-      return expect(likeRepositoryPostgres.checkStatus({id : "like-123", is_deleted : false})).rejects.toThrowError(
-        NotFoundError
-      );
+      return expect(likeRepositoryPostgres.checkStatus({id : "like-123", is_deleted : false}))
+        .rejects.toThrow(NotFoundError);
     });
 
     it("should change 'is_deleted' column successfully when like exists", async () => {

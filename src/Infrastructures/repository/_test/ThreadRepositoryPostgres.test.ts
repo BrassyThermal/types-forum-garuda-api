@@ -64,7 +64,7 @@ describe("ThreadRepositoryPostgres", () => {
       // Action & Assert
       return expect(
         threadRepositoryPostgres.checkThread("")
-      ).rejects.toThrowError(NotFoundError);
+      ).rejects.toThrow(NotFoundError);
     });
 
     it("should not throw NotFoundError when thread exists", async () => {
@@ -82,7 +82,7 @@ describe("ThreadRepositoryPostgres", () => {
       // Action and Assert
       return expect(
         threadRepositoryPostgres.checkThread(threadId)
-      ).resolves.not.toThrowError(NotFoundError);
+      ).resolves.not.toThrow(NotFoundError);
     });
   });
 
@@ -97,7 +97,7 @@ describe("ThreadRepositoryPostgres", () => {
       // Action & Assert
       return expect(
         threadRepositoryPostgres.getThreadById("")
-      ).rejects.toThrowError(NotFoundError);
+      ).rejects.toThrow(NotFoundError);
     });
 
     it("should get thread by thread ID correctly", async () => {

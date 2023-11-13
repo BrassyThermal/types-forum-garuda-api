@@ -34,18 +34,18 @@ describe("AddLikeUseCase", () => {
     await addLikeUseCase.execute(useCasePayload);
     
     //Assert
-    expect(mockLikeRepository.addLike).toBeCalledWith(
+    expect(mockLikeRepository.addLike).toHaveBeenCalledWith(
       useCasePayload.commentId,
       useCasePayload.owner
     );
-    expect(mockLikeRepository.checkLike).toBeCalledWith(
+    expect(mockLikeRepository.checkLike).toHaveBeenCalledWith(
       useCasePayload.commentId,
       useCasePayload.owner
     );
-    expect(mockThreadRepository.checkThread).toBeCalledWith(
+    expect(mockThreadRepository.checkThread).toHaveBeenCalledWith(
       useCasePayload.threadId
     );
-    expect(mockCommentRepository.checkComment).toBeCalledWith(
+    expect(mockCommentRepository.checkComment).toHaveBeenCalledWith(
       useCasePayload.commentId,
       useCasePayload.threadId
       );
@@ -90,16 +90,16 @@ describe("AddLikeUseCase", () => {
     await addLikeUseCase.execute(useCasePayload);
 
     //Assert
-    expect(mockLikeRepository.checkStatus).toBeCalledWith(addedLike);
-    expect(mockLikeRepository.checkLike).toBeCalledWith(
+    expect(mockLikeRepository.checkStatus).toHaveBeenCalledWith(addedLike);
+    expect(mockLikeRepository.checkLike).toHaveBeenCalledWith(
       useCasePayload.commentId,
       useCasePayload.owner
     );
-    expect(mockCommentRepository.checkComment).toBeCalledWith(
+    expect(mockCommentRepository.checkComment).toHaveBeenCalledWith(
       useCasePayload.commentId,
       useCasePayload.threadId
     );
-    expect(mockThreadRepository.checkThread).toBeCalledWith(
+    expect(mockThreadRepository.checkThread).toHaveBeenCalledWith(
       useCasePayload.threadId
     );
   });

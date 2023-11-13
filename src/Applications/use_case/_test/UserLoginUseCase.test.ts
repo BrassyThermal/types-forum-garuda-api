@@ -58,21 +58,21 @@ describe("GetAuthenticationUseCase", () => {
         refreshToken: "refresh_token",
       })
     );
-    expect(mockUserRepository.getPasswordByUsername).toBeCalledWith("dicoding");
-    expect(mockPasswordHash.comparePassword).toBeCalledWith(
+    expect(mockUserRepository.getPasswordByUsername).toHaveBeenCalledWith("dicoding");
+    expect(mockPasswordHash.comparePassword).toHaveBeenCalledWith(
       "secret",
       "encrypted_password"
     );
-    expect(mockUserRepository.getIdByUsername).toBeCalledWith("dicoding");
-    expect(mockAuthTokenManager.createAccessToken).toBeCalledWith({
+    expect(mockUserRepository.getIdByUsername).toHaveBeenCalledWith("dicoding");
+    expect(mockAuthTokenManager.createAccessToken).toHaveBeenCalledWith({
       username: "dicoding",
       id: "user-123",
     });
-    expect(mockAuthTokenManager.createRefreshToken).toBeCalledWith({
+    expect(mockAuthTokenManager.createRefreshToken).toHaveBeenCalledWith({
       username: "dicoding",
       id: "user-123",
     });
-    expect(mockAuthRepository.addToken).toBeCalledWith(
+    expect(mockAuthRepository.addToken).toHaveBeenCalledWith(
       mockedAuthentication.refreshToken
     );
   });

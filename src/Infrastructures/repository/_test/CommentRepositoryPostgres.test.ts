@@ -73,7 +73,7 @@ describe("CommentRepositoryPostgres", () => {
       // Action & Assert
       return expect(
         commentRepositoryPostgres.checkComment("", threadId)
-      ).rejects.toThrowError(NotFoundError);
+      ).rejects.toThrow(NotFoundError);
     });
 
     it("should throw NotFoundError when thread not found", async () => {
@@ -96,7 +96,7 @@ describe("CommentRepositoryPostgres", () => {
       // Action & Assert
       return expect(
         commentRepositoryPostgres.checkComment(commentId, "")
-      ).rejects.toThrowError(NotFoundError);
+      ).rejects.toThrow(NotFoundError);
     });
 
     it("should not throw NotFoundError when comment found", async () => {
@@ -119,7 +119,7 @@ describe("CommentRepositoryPostgres", () => {
       // Action & Assert
       return expect(
         commentRepositoryPostgres.checkComment(commentId, threadId)
-      ).resolves.not.toThrowError(NotFoundError);
+      ).resolves.not.toThrow(NotFoundError);
     });
   });
 
@@ -145,7 +145,7 @@ describe("CommentRepositoryPostgres", () => {
       // Action & Assert
       await expect(
         commentRepositoryPostgres.verifyCommentOwner(commentId, wrongUserId)
-      ).rejects.toThrowError(AuthorizationError);
+      ).rejects.toThrow(AuthorizationError);
     });
 
     it("should verify the comment owner correctly", async () => {
@@ -168,7 +168,7 @@ describe("CommentRepositoryPostgres", () => {
       // Action & Assert
       await expect(
         commentRepositoryPostgres.verifyCommentOwner(commentId, userId)
-      ).resolves.not.toThrowError(AuthorizationError);
+      ).resolves.not.toThrow(AuthorizationError);
     });
   });
 
@@ -206,7 +206,7 @@ describe("CommentRepositoryPostgres", () => {
       // Action & Assert
       return expect(
         commentRepositoryPostgres.deleteCommentById("")
-      ).rejects.toThrowError(NotFoundError);
+      ).rejects.toThrow(NotFoundError);
     });
 
     it("should delete comment by id and return success correctly", async () => {

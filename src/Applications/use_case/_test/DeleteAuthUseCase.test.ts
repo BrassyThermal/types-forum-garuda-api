@@ -8,7 +8,7 @@ describe("DeleteAuthUseCase", () => {
     const deleteAuthUseCase = new DeleteAuthUseCase({} as any);
 
     // Action & Assert
-    await expect(deleteAuthUseCase.execute(useCasePayload as any)).rejects.toThrowError(
+    await expect(deleteAuthUseCase.execute(useCasePayload as any)).rejects.toThrow(
       "DELETE_AUTHENTICATION_USE_CASE.NOT_CONTAIN_REFRESH_TOKEN"
     );
   });
@@ -21,7 +21,7 @@ describe("DeleteAuthUseCase", () => {
     const deleteAuthUseCase = new DeleteAuthUseCase({} as any);
 
     // Action & Assert
-    await expect(deleteAuthUseCase.execute(useCasePayload as any)).rejects.toThrowError(
+    await expect(deleteAuthUseCase.execute(useCasePayload as any)).rejects.toThrow(
       "DELETE_AUTHENTICATION_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATION"
     );
   });
