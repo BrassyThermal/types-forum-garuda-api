@@ -8,7 +8,7 @@ describe("an UserLogin entities", () => {
     };
   
     // Action & Assert
-    expect(() => new UserLogin(payload as any)).toThrowError(
+    expect(() => new UserLogin(payload as any)).toThrow(
       "USER_LOGIN.NOT_CONTAIN_NEEDED_PROPERTY"
     );
   });
@@ -22,7 +22,7 @@ describe("an UserLogin entities", () => {
     };
 
     // Action & Assert
-    expect(() => new UserLogin(payload as any)).toThrowError(
+    expect(() => new UserLogin(payload as any)).toThrow(
       "USER_LOGIN.NOT_MEET_DATA_TYPE_SPECIFICATION"
     );
   });

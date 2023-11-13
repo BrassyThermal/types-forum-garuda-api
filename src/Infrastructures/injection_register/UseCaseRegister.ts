@@ -6,6 +6,7 @@ import AuthRepository from "../../Domains/auths/AuthRepository";
 import ThreadRepository from "../../Domains/threads/ThreadRepository";
 import CommentRepository from "../../Domains/comments/CommentRepository";
 import ReplyRepository from "../../Domains/replies/ReplyRepository";
+import LikeRepository from "../../Domains/likes/LikeRepository";
 
 // Importing Security
 import PasswordHash from "../../Applications/security/PasswordHash";
@@ -19,6 +20,7 @@ import RefreshAuthUseCase from "../../Applications/use_case/RefreshAuthUseCase";
 import AddThreadUseCase from "../../Applications/use_case/AddThreadUseCase";
 import AddCommentUseCase from "../../Applications/use_case/AddCommentUseCase";
 import AddReplyUseCase from "../../Applications/use_case/AddReplyUseCase";
+import AddLikeUseCase from "../../Applications/use_case/AddLikeUseCase";
 import CheckThreadDetailUseCase from "../../Applications/use_case/CheckThreadDetailUseCase";
 import DeleteCommentUseCase from "../../Applications/use_case/DeleteCommentUseCase";
 import DeleteReplyUseCase from "../../Applications/use_case/DeleteReplyUseCase";
@@ -133,6 +135,10 @@ export const UseCaseRegister = [
           name: "replyRepository",
           internal: ReplyRepository.name,
         },
+        {
+          name: "likeRepository",
+          internal: LikeRepository.name,
+        },
       ],
     },
   },
@@ -212,6 +218,28 @@ export const UseCaseRegister = [
         {
           name: "replyRepository",
           internal: ReplyRepository.name,
+        },
+      ],
+    },
+  },
+
+  {
+    key: AddLikeUseCase.name,
+    Class: AddLikeUseCase,
+    parameter: {
+      injectType: "destructuring",
+      dependencies: [
+        {
+          name: "threadRepository",
+          internal: ThreadRepository.name,
+        },
+        {
+          name: "commentRepository",
+          internal: CommentRepository.name,
+        },
+        {
+          name: "likeRepository",
+          internal: LikeRepository.name,
         },
       ],
     },

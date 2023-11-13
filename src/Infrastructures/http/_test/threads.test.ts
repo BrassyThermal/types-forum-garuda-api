@@ -4,6 +4,7 @@ import { accessTestHelper } from "../../../../tests_helper/access";
 import { threadsTableTestHelper } from "../../../../tests_helper/threadsTable";
 import { commentsTableTestHelper } from "../../../../tests_helper/commentsTable";
 import { repliesTableTestHelper } from "../../../../tests_helper/repliesTable";
+import { likesTableTestHelper } from "../../../../tests_helper/likesTable";
 import { CreateServer } from "../CreateServer";
 import { injection } from "../../injection";
 
@@ -147,6 +148,11 @@ describe("/threads endpoints", () => {
         commentId: commentId1,
         date: "2021-08-12T07:26:21.338Z",
       });
+      await likesTableTestHelper.addLike({
+        id: "like-123",
+        commentId: commentId2,
+        owner,
+      });
       const expectedComments = [
         {
           id: commentId1,
@@ -161,6 +167,7 @@ describe("/threads endpoints", () => {
               date: "2021-08-12T07:26:21.338Z",
             },
           ],
+          likeCount: 0
         },
         {
           id: commentId2,
@@ -168,10 +175,11 @@ describe("/threads endpoints", () => {
           date: "2021-08-08T07:27:21.338Z",
           content: "**komentar telah dihapus**",
           replies: [],
+          likeCount: 1
         },
       ];
-
       const server = await CreateServer(injection);
+
       // Action
       const response = await server.inject({
         method: "GET",

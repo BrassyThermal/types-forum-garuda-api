@@ -12,6 +12,7 @@ import AuthRepository from "../../Domains/auths/AuthRepository";
 import ThreadRepository from "../../Domains/threads/ThreadRepository";
 import CommentRepository from "../../Domains/comments/CommentRepository";
 import ReplyRepository from "../../Domains/replies/ReplyRepository";
+import LikeRepository from "../../Domains/likes/LikeRepository";
 
 // Importing Service Repository
 import UserRepositoryPostgres from "../repository/UserRepositoryPostgres";
@@ -19,6 +20,7 @@ import AuthRepositoryPostgres from "../repository/AuthRepositoryPostgres";
 import ThreadRepositoryPostgres from "../repository/ThreadRepositoryPostgres";
 import CommentRepositoryPostgres from "../repository/CommentRepositoryPostgres";
 import ReplyRepositoryPostgres from "../repository/ReplyRepositoryPostgres";
+import LikeRepositoryPostgres from "../repository/LikeRepositoryPostgres";
 
 // Importing Security 
 import PasswordHash from "../../Applications/security/PasswordHash";
@@ -112,6 +114,21 @@ export const ServiceRegister = [
   {
     key: ReplyRepository.name,
     Class: ReplyRepositoryPostgres,
+    parameter: {
+      dependencies: [
+        {
+          concrete: pool,
+        },
+        {
+          concrete: nanoid,
+        },
+      ],
+    },
+  },
+
+  {
+    key: LikeRepository.name,
+    Class: LikeRepositoryPostgres,
     parameter: {
       dependencies: [
         {

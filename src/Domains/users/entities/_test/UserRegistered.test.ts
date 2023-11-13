@@ -9,7 +9,7 @@ describe("an UserRegistered entities", () => {
     };
 
     // Action and Assert
-    expect(() => new UserRegistered(payload as any)).toThrowError(
+    expect(() => new UserRegistered(payload as any)).toThrow(
       "REGISTERED_USER.NOT_CONTAIN_NEEDED_PROPERTY"
     );
   });
@@ -23,7 +23,7 @@ describe("an UserRegistered entities", () => {
     };
 
     // Action and Assert
-    expect(() => new UserRegistered(payload as any)).toThrowError(
+    expect(() => new UserRegistered(payload as any)).toThrow(
       "REGISTERED_USER.NOT_MEET_DATA_TYPE_SPECIFICATION"
     );
   });

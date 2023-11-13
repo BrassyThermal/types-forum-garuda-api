@@ -9,7 +9,7 @@ describe("a DeleteComment entities", () => {
     };
 
     // Action and Assert
-    expect(() => new DeleteComment(payload as any)).toThrowError(
+    expect(() => new DeleteComment(payload as any)).toThrow(
       "DELETE_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY"
     );
   });
@@ -23,7 +23,7 @@ describe("a DeleteComment entities", () => {
     };
 
     // Action and Assert
-    expect(() => new DeleteComment(payload as any)).toThrowError(
+    expect(() => new DeleteComment(payload as any)).toThrow(
       "DELETE_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION"
     );
   });

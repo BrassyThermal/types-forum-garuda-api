@@ -8,7 +8,7 @@ describe("a AddLike entities", () => {
     };
 
     // Action and Assert 
-    expect(() => new AddLike(payload as any)).toThrowError(
+    expect(() => new AddLike(payload as any)).toThrow(
       "ADD_LIKE.NOT_CONTAIN_NEEDED_PROPERTY"
     );
   });
@@ -22,7 +22,7 @@ describe("a AddLike entities", () => {
     };
 
     // Action and Assert
-    expect(() => new AddLike(payload as any)).toThrowError(
+    expect(() => new AddLike(payload as any)).toThrow(
       "ADD_LIKE.NOT_MEET_DATA_TYPE_SPECIFICATION"
     );
   });

@@ -7,6 +7,7 @@ export interface InterfaceComment {
   content : string;
   is_deleted ?: boolean;
   replies ?: InterfaceReply[];
+  likeCount ?: number;
 }
 
 export default class CheckComment {

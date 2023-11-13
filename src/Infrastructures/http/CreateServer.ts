@@ -10,6 +10,7 @@ import { auths } from "../../Interfaces/http/api/auths";
 import { threads } from "../../Interfaces/http/api/threads";
 import { comments } from "../../Interfaces/http/api/comments";
 import { replies } from "../../Interfaces/http/api/replies";
+import { likes } from "../../Interfaces/http/api/likes";
 
 // Importing an Error
 import ClientError from "../../Commons/exceptions/ClientError";
@@ -71,6 +72,10 @@ export const CreateServer = async (
       plugin: replies,
       options: { container },
     },
+    {
+      plugin: likes,
+      options: { container },
+    },
   ]);
 
   server.route({
@@ -112,24 +117,20 @@ export const CreateServer = async (
       const translatedError = DomainErrorTranslator.translate(response);
 
       if (translatedError instanceof ClientError) {
-        return h
-          .response({
-            status: "fail",
-            message: translatedError.message,
-          })
-          .code(translatedError.statusCode);
+        return h.response({
+          status: "fail",
+          message: translatedError.message,
+        }).code(translatedError.statusCode);
       }
 
       if (!(translatedError as { isServer : boolean }).isServer) {
         return h.continue;
       }
 
-      return h
-        .response({
-          status: "error",
-          message: "terjadi kegagalan pada server kami",
-        })
-        .code(500);
+      return h.response({
+        status: "error",
+        message: "terjadi kegagalan pada server kami",
+      }).code(500);
     }
 
     return h.continue;
