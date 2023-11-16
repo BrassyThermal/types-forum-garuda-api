@@ -9,7 +9,7 @@ describe("an AddComment entities", () => {
     };
 
     // Action and Assert
-    expect(() => new AddComment(payload as any)).toThrowError(
+    expect(() => new AddComment(payload as any)).toThrow(
       "ADD_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY"
     );
   });
@@ -23,7 +23,7 @@ describe("an AddComment entities", () => {
     };
 
     // Action and Assert
-    expect(() => new AddComment(payload as any)).toThrowError(
+    expect(() => new AddComment(payload as any)).toThrow(
       "ADD_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION"
     );
   });

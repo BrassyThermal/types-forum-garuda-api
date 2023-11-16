@@ -84,7 +84,7 @@ describe("ReplyRepositoryPostgres", () => {
       // Action & Assert
       return expect(
         replyRepositoryPostgres.checkReply(replyId, "")
-      ).rejects.toThrowError(NotFoundError);
+      ).rejects.toThrow(NotFoundError);
     });
 
     it("should throw NotFoundError when reply not found", async () => {
@@ -102,7 +102,7 @@ describe("ReplyRepositoryPostgres", () => {
       // Action & Assert
       return expect(
         commentRepositoryPostgres.checkReply("", commentId)
-      ).rejects.toThrowError(NotFoundError);
+      ).rejects.toThrow(NotFoundError);
     });
 
     it("should not throw NotFoundError when reply found", async () => {
@@ -121,7 +121,7 @@ describe("ReplyRepositoryPostgres", () => {
       // Action & Assert
       return expect(
         commentRepositoryPostgres.checkReply(replyId, commentId)
-      ).resolves.not.toThrowError(NotFoundError);
+      ).resolves.not.toThrow(NotFoundError);
     });
   });
 
@@ -148,7 +148,7 @@ describe("ReplyRepositoryPostgres", () => {
       // Action & Assert
       await expect(
         replyRepositoryPostgres.verifyReplyOwner(replyId, "")
-      ).rejects.toThrowError(AuthorizationError);
+      ).rejects.toThrow(AuthorizationError);
     });
 
     it("should verify the reply owner correctly", async () => {
@@ -173,7 +173,7 @@ describe("ReplyRepositoryPostgres", () => {
       // Action & Assert
       await expect(
         replyRepositoryPostgres.verifyReplyOwner(replyId, userId)
-      ).resolves.not.toThrowError(AuthorizationError);
+      ).resolves.not.toThrow(AuthorizationError);
     });
   });
 
@@ -285,7 +285,7 @@ describe("ReplyRepositoryPostgres", () => {
       // Action & Assert
       return expect(
         replyRepositoryPostgres.deleteReplyById("")
-      ).rejects.toThrowError(NotFoundError);
+      ).rejects.toThrow(NotFoundError);
     });
 
     it("should delete reply by id and return success correctly", async () => {

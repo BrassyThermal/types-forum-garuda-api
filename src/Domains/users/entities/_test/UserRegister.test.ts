@@ -9,7 +9,7 @@ describe("an UserRegister entities", () => {
     };
 
     // Action and Assert
-    expect(() => new UserRegister(payload as any)).toThrowError(
+    expect(() => new UserRegister(payload as any)).toThrow(
       "USER_REGISTER.NOT_CONTAIN_NEEDED_PROPERTY"
     );
   });
@@ -23,7 +23,7 @@ describe("an UserRegister entities", () => {
     };
 
     // Action and Assert
-    expect(() => new UserRegister(payload as any)).toThrowError(
+    expect(() => new UserRegister(payload as any)).toThrow(
       "USER_REGISTER.NOT_MEET_DATA_TYPE_SPECIFICATION"
     );
   });
@@ -37,7 +37,7 @@ describe("an UserRegister entities", () => {
     };
 
     // Action and Assert
-    expect(() => new UserRegister(payload)).toThrowError(
+    expect(() => new UserRegister(payload)).toThrow(
       "USER_REGISTER.USERNAME_LIMIT_CHAR"
     );
   });
@@ -51,7 +51,7 @@ describe("an UserRegister entities", () => {
     };
 
     // Action and Assert
-    expect(() => new UserRegister(payload)).toThrowError(
+    expect(() => new UserRegister(payload)).toThrow(
       "USER_REGISTER.USERNAME_CONTAIN_RESTRICTED_CHARACTER"
     );
   });

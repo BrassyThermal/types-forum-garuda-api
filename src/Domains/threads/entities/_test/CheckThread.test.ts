@@ -6,7 +6,7 @@ describe("a CheckThread entities", () => {
     const payload = { threadId: null };
 
     // Action and Assert
-    expect(() => new CheckThread(payload as any)).toThrowError(
+    expect(() => new CheckThread(payload as any)).toThrow(
       "CHECK_THREAD.NOT_CONTAIN_NEEDED_PROPERTY"
     );
   });
@@ -16,7 +16,7 @@ describe("a CheckThread entities", () => {
     const payload = { threadId: 123 };
 
     // Action and Assert
-    expect(() => new CheckThread(payload as any)).toThrowError(
+    expect(() => new CheckThread(payload as any)).toThrow(
       "CHECK_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION"
     );
   });
